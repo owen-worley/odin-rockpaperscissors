@@ -6,14 +6,84 @@
 <body>
 
   <script>
-let str = prompt();
+game();
 
-console.log(lastLetter(str));
+function game() {
+  var i;
+  for (i = 0; i < 5; i++) {
+    let playerChoice = prompt();
+    let computerChoice = computerPlay();
+    console.log(playRound(playerChoice, computerChoice));
+  }
+}
 
-function lastLetter(input) {
-  let length = input.length;
-  let last = input.charAt(length - 1);
-  return(last);
+function playRound(playerSelection, computerSelection) {
+  let player = playerSelection.toLowerCase();
+  let computer = computerSelection.toLowerCase();
+  if ((player !== "rock") && (player !== "paper") && (player !== "scissors")) {
+    return("Invalid Input. Please enter 'Rock', 'Paper', or 'Scissors'.");
+  };
+
+  if (player === "rock") {
+    if (computer === "rock") {
+      return("It's a Tie! Both players chose Rock.");
+    }
+    else if (computer === "paper") {
+      return("You Lose! Paper covers Rock.");
+    }
+    else if (computer === "scissors") {
+      return("You Win! Rock bashes Scissors.");
+    }
+    else {
+      return("Unexpected Error");
+    }
+  }
+  else if (player === "paper") {
+    if (computer === "rock") {
+      return("You Win! Paper covers Rock.");
+    }
+    else if (computer === "paper") {
+      return("It's a Tie! Both players chose Paper.");
+    }
+    else if (computer === "scissors") {
+      return("You Lose! Scissors cuts Paper.");
+    }
+    else {
+      return("Unexpected Error");
+    }
+  }
+  else if (player === "scissors") {
+    if (computer === "rock") {
+      return("You Lose! Rock bashes Scissors.");
+    }
+    else if (computer === "paper") {
+      return("You Win! Scissors cut Paper.");
+    }
+    else if (computer === "scissors") {
+      return("It's a Tie! Both players chose Scissors.");
+    }
+    else {
+      return("Unexpected Error");
+    }
+  }
+  else {
+    return("Unexpected Error");
+  }
+}
+
+function computerPlay() {
+  let rand = Math.ceil(Math.random()*3);
+  var choice;
+  if (rand === 1) {
+    choice = "rock";
+  }
+  else if (rand === 2) {
+    choice = "paper";
+  }
+  else {
+    choice = "scissors";
+  }
+  return(choice);
 }
   </script>
 </body>
